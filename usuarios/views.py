@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 
 def cadastro(request):
-    if request.user.is_authenticated:
-        return redirect('/divulgar/novo_pet')
+    #if request.user.is_authenticated:
+    #    return redirect('/divulgar/novo_pet')
     if request.method == "GET":
         return render(request, 'cadastro.html')
     elif request.method == "POST":
@@ -40,9 +40,9 @@ def logar(request):
     if request.method == "GET":
         return render(request,'login.html')
     elif request.method == "POST":
-        email = request.POST.get('email')
+        nome = request.POST.get('nome')
         senha = request.POST.get('senha')
-        user = authenticate(email=email,
+        user = authenticate(username=nome,
                     password=senha)
         if user is not None:
             login(request, user)
