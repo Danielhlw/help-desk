@@ -31,3 +31,7 @@ def cadastro(request):
         except:
             messages.add_message(request, constants.ERROR, 'Erro interno do sistema')
             return render(request, 'cadastro.html')
+
+def logar(request):
+    if request.method == "GET":
+        return render(request,'login.html')
