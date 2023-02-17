@@ -1,9 +1,13 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.contrib.auth.models import User
+from django.shortcuts import redirect
 
 def cadastro(request):
+    if request.user.is_authenticated:
+        return redirect('/divulgar/novo_pet')
     if request.method == "GET":
         return render(request, 'cadastro.html')
     elif request.method == "POST":
@@ -35,3 +39,22 @@ def cadastro(request):
 def logar(request):
     if request.method == "GET":
         return render(request,'login.html')
+    elif request.method == "POST":
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
+        user = authenticate(email=email,
+                    password=senha)
+        if user is not None:
+            login(request, user)
+            return redirect('/requisicao/novo_ticket')
+        else:
+            messages.add_message(request, constants.ERROR, 'E-mail ou senha inválidas')
+            return render(request, 'login.html')
+
+def sair(request):
+    logout(request)
+    return redirect('/auth/login')
+
+
+    
+
