@@ -5,25 +5,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cadastro</title>
-    <link href="<https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css>" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{% static 'usuarios/css/cadastro.css' %}" rel="stylesheet">
 
     </head>
     <body>
-        <ul>
-            <li><a href="/auth/login">Login</a></li>
-            <li><a href="">Seus pedidos</a></li>
-            <a href=" {% url 'sair' %}" class="btn btn-danger">Logout</a> 
-        </ul>
 
         <div class="container-fluid">
             <div class="row">
+                <div class="col-md-2 bg-side sidebar">
+                    <img src="{% static 'usuarios/img/help-desk.png' %}" width="100%">
+                    <hr>
+
+                    <a class="btn btn-primary col-12" href="/auth/login">Login</a><br><br>
+                    <a href=" {% url 'sair' %}" class="btn btn-danger">Logout</a> 
+                    <hr>
+
+                    <hr>
+                    
+                </div>
 
                 <div class="col-md">
                     <div class="wrapper">
                         <div class="box">
                             <div class="header-box">
-                                <h3 class="font-vinho">Relatório de pedido</h3>
+                                <h3 class="font-vinho">Relatório de Pedido</h3>
                                 <hr>
                             </div>
                             <div class="body-box">
@@ -36,12 +42,26 @@
                                             </div>
                                         {% endfor %}
                                     {% endif %}
-                                   
-                                    <span>Nome:<span>
-                                    <input type="text" class="form-control" name="nome" placeholder="Digite o nome do departamento...">
                                     <br>
-                                    <span>Descrição do erro:<span>
-                                    <textarea class="form-control" name="descricao" placeholder="Descrição do problema..."></textarea> 
+                                    <span>Nome:<span>
+                                    <input type="text" class="form-control" name="nome" placeholder="Digite o seu nome...">
+                                    <br>
+                                    <span>Descrição:<span>
+                                    <textarea class="form-control" name="descricao" placeholder="Descrição do pedido..."></textarea>
+                                    <br>
+                                        <div class="col-md">
+                                            <span>Departamento:</span>
+                                            <input type="text" placeholder="Digite o seu departamento..." name="cidade" class="form-control">
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <span>Tags:</span>
+                                    <select name="tags" multiple class="form-select">
+                                        {% for tag in tags%}
+                                            <option value="{{tag.id}}">{{tag}}</option>
+                                        {% endfor %}
+                                       
+                                    </select>
                                     <br>
 
                                     <input type="submit" value="ENVIAR" class="btn-custom-primary">
@@ -53,9 +73,12 @@
 
             </div>
 
+
         </div>
 
+
+
     
-    <script src="<https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
